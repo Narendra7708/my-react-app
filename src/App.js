@@ -1,25 +1,30 @@
-import logo from './logo.svg';
-import './App.css';
 
-function App() {
+import 'bootstrap/dist/css/bootstrap.min.css';
+// import Usecallback from './components/functional-components/Hooks/useCallback/Usecallback';
+import Navigationstack from './Rounting/Navigation';
+import { createContext, useState } from 'react';
+// import UseMemo from './components/functional-components/Hooks/useMemo/useMemoParent';
+
+
+
+
+export  const AppData = createContext()
+export const LoginInfo=createContext()
+export default function App() {
+  //const [name, setName] = useState("Narendra")
+  const[login,setLogin]=useState(false)
+  const loginUser=()=>{
+    setLogin(true)
+  }
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+    
+      <LoginInfo.Provider value={{login:login,loginUser:loginUser}}>
+    <AppData.Provider >
+      <Navigationstack />
+    </AppData.Provider>
+    </LoginInfo.Provider> 
+    //  <UseMemo/> 
+  // <Usecallback/>
 
-export default App;
+  )
+}
